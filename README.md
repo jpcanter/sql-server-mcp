@@ -31,9 +31,14 @@ Key configuration options:
 - **DB_SERVER**: SQL Server hostname
 - **DB_DATABASE**: Database name
 - **DB_USER/DB_PASSWORD**: Credentials
+- **DB_ENCRYPT**: Enable encryption (default: true)
+- **DB_TRUST_SERVER_CERTIFICATE**: Trust server certificate for dev environments (default: false)
 - **ENABLE_WRITE_OPERATIONS**: Enable INSERT/UPDATE/DELETE (default: true)
 - **ENABLE_SP_MODIFICATIONS**: Enable stored procedure management (default: true)
+- **REQUIRE_TRANSACTIONS**: Require explicit transactions for modifications (default: true)
+- **MAX_ROWS_AFFECTED**: Maximum rows that can be modified in one operation (default: 10000)
 - **DRAFT_SCHEMA**: Schema for testing SPs before deployment (default: dbo_draft)
+- **AUTO_BACKUP_BEFORE_DEPLOY**: Auto-backup SPs before deploying (default: true)
 
 See `.env.example` for all options.
 
@@ -46,7 +51,7 @@ Add to your MCP configuration file (`.claude.json` or `~/.claude.json`):
   "mcpServers": {
     "mssql": {
       "command": "node",
-      "args": ["/absolute/path/to/db_mcp/dist/index.js"],
+      "args": ["/absolute/path/to/sql-server-mcp/dist/index.js"],
       "env": {
         "DB_SERVER": "localhost",
         "DB_DATABASE": "MyDatabase",
@@ -63,6 +68,7 @@ Add to your MCP configuration file (`.claude.json` or `~/.claude.json`):
 ## Available Tools
 
 ### Discovery & Schema
+- **list_stored_procedures**: List stored procedures with pagination
 - **search_stored_procedures**: Search SPs by name or content
 - **get_table_schema**: Get table structure with columns, indexes, foreign keys
 - **get_dependencies**: Analyze object dependencies (callers and references)
